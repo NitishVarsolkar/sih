@@ -1,1 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Website</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .marquee-box {
+            overflow: hidden;
+            white-space: nowrap;
+            background-color: #f8f9fa;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .marquee-text {
+            display: inline-block;
+            animation: marquee 30s linear infinite; /* Slowed down to 30s */
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .circular-camera {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+        .detail-section {
+            display: none; /* Initially hidden */
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="https://i.ibb.co/6bmfJLj/images.jpg" width="85" height="85" alt="Logo 1" class="mr-2">
+            <img src="https://i.ibb.co/89pvGGZ/sihlogo.webp" width="85" height="85" alt="Logo 2">
+        </a>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Video Players -->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h6>Left Hand</h6>
+                <video width="100%" controls>
+                    <source src="video1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h6>Right Hand</h6>
+                <video width="100%" controls>
+                    <source src="video2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+
+        <!-- Marquee Text Box -->
+        <div class="marquee-box">
+            <div class="marquee-text">Mitochondria are membrane-bound cell organelles (mitochondrion, singular) that generate most of the chemical energy needed to power the cell's biochemical reactions. Chemical energy produced by the mitochondria is stored in a small molecule called adenosine triphosphate (ATP).</div>
+        </div>
+    </div>
+
+    <!-- Button to Show Details -->
+    <button id="detail-btn" class="btn btn-primary">Detail</button>
+
+    <!-- Detail Section -->
+    <div class="detail-section" id="detail-section">
+        <p><strong>Meet ID:</strong> 12345</p>
+        <p><strong>Topic:</strong> Mitochondria</p>
+        <p><strong>Host:</strong> John Doe</p>
+    </div>
+
+    <!-- Camera Input -->
+    <div class="circular-camera">
+        <video autoplay muted playsinline width="100%" height="100%" id="camera-video"></video>
+    </div>
+
+    <!-- JavaScript to handle camera input and toggle details -->
+    <script>
+        const video = document.getElementById('camera-video');
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+                video.srcObject = stream;
+                video.play();
+            }).catch(function(error) {
+                console.log("Camera access denied: ", error);
+            });
+        }
+
+        // Toggle Detail Section
+        const detailBtn = document.getElementById('detail-btn');
+        const detailSection = document.getElementById('detail-section');
+        detailBtn.addEventListener('click', function() {
+            if (detailSection.style.display === "none") {
+                detailSection.style.display = "block";
+            } else {
+                detailSection.style.display = "none";
+            }
+        });
+    </script>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 
